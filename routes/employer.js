@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getCompany,
   updateCompany,
+  getSummary,
   getJobs,
   createJob,
   updateJob,
@@ -15,6 +16,7 @@ const router = express.Router();
 
 router.use(roleMiddleware("employer"));
 
+router.get("/summary", getSummary);
 router.get("/company", getCompany);
 router.put("/company", updateCompany);
 router.get("/jobs", getJobs);

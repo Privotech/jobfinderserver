@@ -211,7 +211,7 @@ async function getApplications(req, res, next) {
 
     // Retrieve applications with candidate and resume information
     const apps = await Application.find({ job: job._id })
-      .populate("candidate")
+      .populate("candidate", "name email")
       .populate("resume")
       .sort({ createdAt: -1 })
       .lean();

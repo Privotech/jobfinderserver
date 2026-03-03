@@ -3,6 +3,7 @@ const User = require('../models/User');
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
 
 function authMiddleware(req, res, next) {
+  if (req.method === 'OPTIONS') return next();
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ success: false, error: 'Unauthorized' });
@@ -21,6 +22,7 @@ function authMiddleware(req, res, next) {
 }
 
 function optionalAuth(req, res, next) {
+  if (req.method === 'OPTIONS') return next();
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) return next();
   const token = authHeader.slice(7);

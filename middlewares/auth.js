@@ -16,7 +16,7 @@ function authMiddleware(req, res, next) {
       req.user = user;
       next();
     }).catch(() => res.status(401).json({ success: false, error: 'Unauthorized' }));
-  } catch {
+  } catch { 
     return res.status(401).json({ success: false, error: 'Invalid token' });
   }
 }
